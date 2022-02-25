@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //수평축과 수직축의 입력값을 감지해서 저장
+
         float xInput = Input.GetAxis("Horizontal");
         //키보드 : 'A', -> : 음의 방향 : 최대 값 : -1.0f
         //키보드 : 'D', <- : 양의 방향 : 최대 값 : +1.0f
@@ -29,7 +30,17 @@ public class PlayerController : MonoBehaviour
         float zlnput = Input.GetAxis("Vertical");
         //키보드 : 'W', ^ : 양의 방향 : +1.0f
         //키보드 : 'S', V : 음의 방향 : -1.0f
-       
+
+        float xSpeed = xInput * speed;
+        float zSpeed = zlnput * speed;
+        //실제 입력값과 이동속력을 사용해 결정
+
+        //vecter3 속도를 xSpeed 
+        Vector3 newVelocity = new Vector3(xSpeed, 0, zSpeed);
+
+        //리지드바디에 속도에 newvelocity 를 할당
+        playerRigidbody.velocity = newVelocity;
+
 
     }
 
@@ -62,7 +73,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         gameObject.SetActive(false);
     }
